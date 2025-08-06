@@ -1,12 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import Header from "../Header/Header";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "react-slideshow-image/dist/styles.css"; // Import the CSS for the slideshow
@@ -24,8 +30,16 @@ import Footer from "../Footer/Footer";
 import Cart from "../Modal/Cart";
 import { useNavigate } from "react-router-dom";
 import Store from "../../UseUserStore";
+import { base } from "../../constants/contants";
 export default function Home() {
-  const { setarryy, setlaparryy, arryy, laparryy, addtocartlist, setaddtocartlist } = Store();
+  const {
+    setarryy,
+    setlaparryy,
+    arryy,
+    laparryy,
+    addtocartlist,
+    setaddtocartlist,
+  } = Store();
   const [excitedealslist, setExcitedealslist] = useState([]);
   const [modalstae, setModalstae] = useState(false);
   const [largecards, setLargecards] = useState([]);
@@ -36,17 +50,17 @@ export default function Home() {
   const [lapproducts, setLaproducts] = useState([]);
   const [shpcat, setShpcat] = useState([]);
   const [cartItem, setCartItem] = useState(null);
-  console.log(addtocartlist)
+  console.log(addtocartlist);
   let naviate = useNavigate();
   const onSaleRef = useRef(null);
   const home = async () => {
     try {
-      const url = "http://localhost:4000/auth/home";
+      const url = base + "/auth/home";
       const response = await fetch(url);
       const data = await response.json();
       // console.log(data);
       setProducts(data.productitem);
-      setLaproducts(data.laptopitem)
+      setLaproducts(data.laptopitem);
       setLargecards(data.home[0].largecard);
       setFeatured(data.home[0].cards);
       setDeals(data.home[0].topdeal);
@@ -54,15 +68,13 @@ export default function Home() {
       setExcitedealslist(data.home[0].excitingdeals);
       setShpcat(data.home[0].shopbycategory);
       setarryy(data.productitem);
-      setlaparryy(data.laptopitem)
-
+      setlaparryy(data.laptopitem);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-
-  console.log(laparryy)
+  console.log(laparryy);
   useEffect(() => {
     home();
   }, []);
@@ -243,8 +255,7 @@ export default function Home() {
                         onClick={() => {
                           setModalstae(true);
                           setCartItem(e); // Set the cart item
-                          setaddtocartlist(e)
-
+                          setaddtocartlist(e);
                         }}
                         className="bg-black rounded-3xl text-gray-300 p-3 mb-3"
                       >
@@ -271,7 +282,8 @@ export default function Home() {
               640: {
                 slidesPerView: 1,
                 spaceBetween: 30,
-              }, 768: {
+              },
+              768: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
@@ -300,7 +312,8 @@ export default function Home() {
                   <div>
                     <p className="bg-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-md inline-block">
                       {e.discounttag} %
-                    </p></div>
+                    </p>
+                  </div>
                   <img
                     className="md:h-[150px] object-cover rounded-md"
                     src={e.imgurl}
@@ -316,9 +329,13 @@ export default function Home() {
                         <FaStar key={index} className="text-yellow-400" />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-500">({e.reviewcount} Review)</span>
+                    <span className="text-sm text-gray-500">
+                      ({e.reviewcount} Review)
+                    </span>
                   </div>
-                  <p className="text-xl font-bold text-red-500 mt-2">₹{e.price}</p>
+                  <p className="text-xl font-bold text-red-500 mt-2">
+                    ₹{e.price}
+                  </p>
                   <button className="mt-auto bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300">
                     Add to Cart
                   </button>
@@ -327,8 +344,6 @@ export default function Home() {
             ))}
           </Swiper>
         )}
-
-
 
         <div className="container">
           {freshitem.length > 0 && (
@@ -361,7 +376,8 @@ export default function Home() {
               640: {
                 slidesPerView: 1,
                 spaceBetween: 30,
-              }, 768: {
+              },
+              768: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
@@ -391,7 +407,8 @@ export default function Home() {
                   <div>
                     <p className="bg-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-md inline-block">
                       {e.discounttag} %
-                    </p></div>
+                    </p>
+                  </div>
                   <img
                     className="md:h-[150px] object-cover rounded-md"
                     src={e.imgurl}
@@ -406,9 +423,13 @@ export default function Home() {
                         <FaStar key={index} className="text-yellow-400" />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-500">({e.reviewcount} Review)</span>
+                    <span className="text-sm text-gray-500">
+                      ({e.reviewcount} Review)
+                    </span>
                   </div>
-                  <p className="text-xl font-bold text-red-500 mt-2">₹{e.price}</p>
+                  <p className="text-xl font-bold text-red-500 mt-2">
+                    ₹{e.price}
+                  </p>
                   <button className="mt-auto bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300">
                     Add to Cart
                   </button>
@@ -424,7 +445,8 @@ export default function Home() {
               <div
                 className="col-md-8 md:p-5 text-sm p-2"
                 style={{
-                  backgroundImage: `url(${excitedealslist[0].imgurl})`, backgroundSize: "cover",
+                  backgroundImage: `url(${excitedealslist[0].imgurl})`,
+                  backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                 }}
               >
@@ -455,7 +477,6 @@ export default function Home() {
               backgroundImage: `url("https://demo-morata.myshopify.com/cdn/shop/files/2_8.png?v=1700194616&width=20004")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-
             }}
           ></div>
           <div className="relative ">
